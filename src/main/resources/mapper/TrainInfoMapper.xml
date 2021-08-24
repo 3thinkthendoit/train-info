@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.think.db.mapper.ITrainInfoMapper">
+
+    <delete id="deleteAllTrainInfo">
+        delete from train_info
+    </delete>
+    <select id="selectDuplicateTrainInfo" resultType="long">
+        SELECT train_id FROM train_info
+        WHERE train_code  IN (SELECT  train_code  FROM train_info  GROUP  BY  train_code   HAVING  COUNT(1) > 1)
+        AND train_id NOT IN  (SELECT MIN(train_id) FROM  train_info  GROUP BY train_code  HAVING COUNT(1) >1)
+    </select>
+
+    <select id="getTrainList" resultType="com.think.db.entity.TrainInfoEntity">
+        select train_code,train_no from train_info where state = 0 limit 50
+    </select>
+
+    <update id="updateTrainInfoByTrainCode" parameterType="map">
+        update train_info
+        set train_class_name = #{trainClass},service_type=#{serviceType},state = 1
+        where train_code = #{trainCode}
+    </update>
+</mapper>
