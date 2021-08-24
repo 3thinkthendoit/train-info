@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author hg
@@ -39,16 +40,16 @@ public class TrainDetailService extends ServiceImpl<ITrainDetailMapper, TrainDet
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    private boolean IS_RUNNING = false;
+    private AtomicBoolean IS_RUNNING = new AtomicBoolean(false);
 
     public void getTrainDetail(){
-        trainInfoService.cleanDuplicateTrainInfo();
-        if(IS_RUNNING){
+        if(IS_RUNNING.get()){
             logger.info("getTrainDetail task 正在运行...");
         }
         Thread t = new Thread(){
             @Override
             public void run() {
+                logger.info("getTrainDetail task 开始运行");
                 runGetTrainDetailTask();
             }
         };
@@ -57,7 +58,7 @@ public class TrainDetailService extends ServiceImpl<ITrainDetailMapper, TrainDet
     }
 
     private void setIsRunning(boolean isRunning){
-        IS_RUNNING = isRunning;
+        IS_RUNNING.set(isRunning);
     }
 
     private void runGetTrainDetailTask() {
@@ -68,7 +69,8 @@ public class TrainDetailService extends ServiceImpl<ITrainDetailMapper, TrainDet
         while (isOK){
            try {
                List<TrainInfoEntity> list = trainInfoMapper.getTrainList();
-               if(list.size() == 0){
+               if(list.isEmpty()){
+                   logger.info("未查询到车次数据.中止任务");
                    isOK = false;
                    setIsRunning(false);
                    return;
@@ -108,6 +110,7 @@ public class TrainDetailService extends ServiceImpl<ITrainDetailMapper, TrainDet
         }
         stopwatch.stop();
         logger.info("getTrainDerail spends:{}",stopwatch.toString());
+
         setIsRunning(false);
     }
 

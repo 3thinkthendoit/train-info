@@ -5,10 +5,16 @@ import com.think.common.domain.R;
 import com.think.service.station.StationInfoService;
 import com.think.service.train.TrainDetailService;
 import com.think.service.train.TrainInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @author hg
@@ -19,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainController {
 
     private final String PASSWORD = "888888";
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     StationInfoService stationInfoService;
@@ -51,6 +59,16 @@ public class TrainController {
             throw new TException("k is error!");
         }
         trainDetailService.getTrainDetail();
-        return R.ok("getTrainInfoTask is running......");
+        return R.ok("getTrainDetailInfoTask is running......");
+    }
+
+    @RequestMapping("/test")
+    public R test(HttpServletRequest request){
+        Enumeration<String> names =  request.getHeaderNames();
+       while (names.hasMoreElements()){
+           String h = names.nextElement();
+           logger.info("name:{},value:{}",h,request.getHeader(h));
+       }
+        return R.ok("test");
     }
 }

@@ -1,13 +1,16 @@
 package com.think.common.domain;
 
+import com.google.common.collect.Maps;
 import org.assertj.core.util.Lists;
 import us.codecraft.webmagic.SpiderListener;
 import us.codecraft.webmagic.downloader.Downloader;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.Scheduler;
+import us.codecraft.webmagic.utils.HttpConstant;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -25,6 +28,12 @@ public class TaskInfo {
     private Downloader downloader;
 
     private List<SpiderListener> listenerList = Lists.newArrayList();
+
+    private HttpConstant.Method method;
+
+    private Map<String,String> headers = Maps.newHashMap();
+
+    private boolean isAsync = true;
 
     public void setSpiderListener(SpiderListener listener){
         listenerList.add(listener);
@@ -74,5 +83,29 @@ public class TaskInfo {
 
     public void setPipeline(Pipeline pipeline) {
         this.pipeline = pipeline;
+    }
+
+    public HttpConstant.Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(HttpConstant.Method method) {
+        this.method = method;
+    }
+
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public void setHeader(String key,String value){
+        this.headers.put(key,value);
+    }
+
+    public boolean isAsync() {
+        return isAsync;
+    }
+
+    public void setAsync(boolean async) {
+        isAsync = async;
     }
 }

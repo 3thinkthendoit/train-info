@@ -35,6 +35,9 @@ public class TrainDetailPipeline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
        try {
            List<TrainDetailInfo> list = resultItems.get("data");
+           if(list ==null || list.isEmpty()){
+               return;
+           }
            String trainCode = resultItems.get("station_train_code");
            String trainClass= resultItems.get("train_class_name");
            String serviceType = resultItems.get("service_type");
@@ -45,12 +48,15 @@ public class TrainDetailPipeline implements Pipeline {
                trainDetailEntity = new TrainDetailEntity();
                tInfo = list.get(i);
                trainDetailEntity.setArriveTime(tInfo.getArriveTime());
-               trainDetailEntity.setIsEnabled((byte)(tInfo.getEnabled()?1:0));
+               trainDetailEntity.setIsEnabled((byte)0);
                trainDetailEntity.setStartTime(tInfo.getStartTime());
                trainDetailEntity.setStationName(tInfo.getStationName());
                trainDetailEntity.setStationNo(Integer.valueOf(tInfo.getStationNo()).byteValue());
                trainDetailEntity.setStopoverTime(tInfo.getStopoverTime());
                trainDetailEntity.setTrainCode(trainCode);
+               trainDetailEntity.setRunningTime(tInfo.getRunningTime());
+               trainDetailEntity.setArriveDayStr(tInfo.getArriveDayStr());
+               trainDetailEntity.setArriveDayDiff(Byte.valueOf(tInfo.getArriveDayDiff()));
                trainDetailList.add(trainDetailEntity);
            }
            Map<String,Object> map = Maps.newHashMap();

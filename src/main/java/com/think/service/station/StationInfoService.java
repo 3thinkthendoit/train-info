@@ -49,6 +49,7 @@ public class StationInfoService extends ServiceImpl<IStationInfoMapper,StationIn
     public void getStationInfo(){
         TaskInfo taskInfo = new TaskInfo();
         taskInfo.setUrl("https://kyfw.12306.cn/otn/resources/js/framework/station_name.js");
+        //taskInfo.setUrl("https://kyfw.12306.cn/otn/queryTrainInfo/query?leftTicketDTO.train_no=5500000Z4000&leftTicketDTO.train_date=2021-08-24&rand_code=1629793873245");
         taskInfo.setPageProcessor(new StationNameProcessor());
         taskInfo.setPipeline(new StationNamePipeline());
         spiderService.doTask(taskInfo);

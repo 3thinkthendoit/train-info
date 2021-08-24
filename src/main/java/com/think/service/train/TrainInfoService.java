@@ -100,6 +100,8 @@ public class TrainInfoService extends ServiceImpl<ITrainInfoMapper,TrainInfoEnti
     @Transactional(rollbackFor = Exception.class)
     public void cleanDuplicateTrainInfo(){
         List<Long> tList = trainInfoMapper.selectDuplicateTrainInfo();
-        trainInfoMapper.deleteBatchIds(tList);
+        if(!tList.isEmpty()) {
+            trainInfoMapper.deleteBatchIds(tList);
+        }
     }
 }

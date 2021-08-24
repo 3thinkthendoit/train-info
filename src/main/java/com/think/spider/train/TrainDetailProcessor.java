@@ -18,13 +18,16 @@ public class TrainDetailProcessor extends BaseProcessor {
 
     @Override
     public void process(Page page) {
-        String result = page.getHtml().get();
+        String result = page.getRawText();
         result = result.replace(" ","");
         result = result.replace("\n","");
-        result = result.replace("<html><head></head><body>","");
-        result = result.replace("</body></html>","");
-        logger.info(result);
-        JSONObject json = JSONObject.parseObject(result);
+        JSONObject json = null;
+        try {
+            json = JSONObject.parseObject(result);
+        }catch (Exception e){
+            logger.error(result);
+            return;
+        }
         if(!json.getBoolean("status")){
             return;
         }
