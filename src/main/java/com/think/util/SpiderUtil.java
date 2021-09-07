@@ -32,15 +32,21 @@ public class SpiderUtil {
      * 获取今天
      * @return
      */
-    public static String getToday(){
+    public static String getDateString(int day){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDateTime now = LocalDateTime.now();
+        if(day!=0){
+            now.plusDays(day);
+        }
         return now.format(formatter);
     }
 
-    public static String getTodayString(){
+    public static String getTodayString(int day){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
+        if(day!=0){
+            now.plusDays(day);
+        }
         return now.format(formatter);
     }
 

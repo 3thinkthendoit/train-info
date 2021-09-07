@@ -1,9 +1,13 @@
 package com.think.spider.train;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.Maps;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TaskContext;
 import com.think.common.domain.TrainListInfo;
 import com.think.db.entity.TrainInfoEntity;
-import com.think.service.train.TrainInfoService;
+import com.think.service.task.TaskService;
+import com.think.service.task.TrainInfoTaskService;
 import com.think.util.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -24,13 +29,10 @@ public class TrainListPipeline implements Pipeline {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
+    private SpiderTaskContext spiderTaskContext;
 
-    private TrainInfoService trainService = SpringContextUtil.getBean(TrainInfoService.class);
-
-    private CountDownLatch countDownLatch;
-
-    public TrainListPipeline(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
+    public TrainListPipeline(SpiderTaskContext spiderTaskContext){
+        this.spiderTaskContext = spiderTaskContext;
     }
 
     private Date parseDate(String dateTxt){
@@ -61,11 +63,12 @@ public class TrainListPipeline implements Pipeline {
                 trainInfoEntity.setTrainDate(parseDate(trainListInfo.getDate()));
                 trainList.add(trainInfoEntity);
             }
-            trainService.saveTrainInfoList(trainList);
+            Map<String,Object> params = Maps.newHashMap();
+            spiderTaskContext.getData().put("list",trainList);
+            spiderTaskContext.getTaskService().afterTask(spiderTaskContext);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
         }finally {
-            countDownLatch.countDown();
         }
         sw.stop();
         logger.info("save train_info list spend {}",sw.toString());

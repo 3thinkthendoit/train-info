@@ -1,5 +1,7 @@
 package com.think.spider.train;
 
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TaskContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Request;
@@ -15,10 +17,10 @@ public class TrainListListener implements SpiderListener {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    private CountDownLatch countDownLatch;
+    private SpiderTaskContext spiderTaskContext;
 
-    public TrainListListener(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
+    public TrainListListener(SpiderTaskContext spiderTaskContext){
+        this.spiderTaskContext = spiderTaskContext;
     }
 
 
@@ -39,6 +41,5 @@ public class TrainListListener implements SpiderListener {
     @Override
     public void onError(Request request, Exception e) {
         logger.error(e.getMessage(),e);
-        countDownLatch.countDown();
     }
 }

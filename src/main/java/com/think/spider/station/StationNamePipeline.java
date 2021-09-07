@@ -1,10 +1,11 @@
 package com.think.spider.station;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
+import com.think.common.domain.SpiderTaskContext;
 import com.think.db.entity.StationInfoEntity;
 import com.think.common.domain.StationNameInfo;
-import com.think.service.station.StationInfoService;
-import com.think.util.SpringContextUtil;
+import com.think.service.task.TaskService;
 import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import java.util.List;
+import java.util.Map;
+
 
 
 /**
@@ -22,7 +25,11 @@ public class StationNamePipeline implements Pipeline {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    private StationInfoService stationInfoService = SpringContextUtil.getBean(StationInfoService.class);
+    private SpiderTaskContext spiderTaskContext;
+
+    public StationNamePipeline(SpiderTaskContext spiderTaskContext){
+        this.spiderTaskContext = spiderTaskContext;
+    }
 
     @Override
     public void process(ResultItems resultItems, Task task) {
@@ -44,7 +51,9 @@ public class StationNamePipeline implements Pipeline {
             stationList.add(station);
         }
         try {
-            stationInfoService.saveStationList(stationList);
+            Map<String,Object> params = Maps.newHashMap();
+            spiderTaskContext.getData().put("list",stationList);
+            spiderTaskContext.getTaskService().afterTask(spiderTaskContext);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
         }

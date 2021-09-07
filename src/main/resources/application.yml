@@ -11,6 +11,7 @@ logging:
   level:
     com.think: info
     org.springframework: info
+    us.codecraft: info
 
 spring:
   datasource:

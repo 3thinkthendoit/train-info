@@ -2,6 +2,8 @@ package com.think.spider.train;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TaskContext;
 import com.think.common.domain.TrainListInfo;
 import com.think.spider.BaseProcessor;
 import org.assertj.core.util.Lists;
@@ -16,6 +18,11 @@ import java.util.Map;
  */
 public class TrainListProcessor extends BaseProcessor {
 
+    SpiderTaskContext spiderTaskContext;
+
+    public TrainListProcessor(SpiderTaskContext spiderTaskContext){
+        this.spiderTaskContext = spiderTaskContext;
+    }
 
     @Override
     public void process(Page page) {
@@ -24,7 +31,6 @@ public class TrainListProcessor extends BaseProcessor {
         result = result.replace("\n","");
         result = result.replace("<html><head></head><body>","");
         result = result.replace("</body></html>","");
-        //logger.info(result);
         JSONObject json = JSONObject.parseObject(result);
         TrainListInfo trainListInfo = null;
         List<TrainListInfo> list = Lists.newArrayList();

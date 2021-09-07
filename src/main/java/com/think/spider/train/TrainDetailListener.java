@@ -1,5 +1,7 @@
 package com.think.spider.train;
 
+import com.think.common.domain.TaskContext;
+import com.think.service.task.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Request;
@@ -14,12 +16,11 @@ public class TrainDetailListener implements SpiderListener {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    private CountDownLatch countDownLatch;
 
-    public TrainDetailListener(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
-    }
-
+    /**
+     * 返回空进行补偿
+     * @param request
+     */
     @Override
     public void onSuccess(Request request) {
 
@@ -36,7 +37,6 @@ public class TrainDetailListener implements SpiderListener {
 
     @Override
     public void onError(Request request, Exception e) {
-        logger.error("error:{}",e.getMessage());
-        countDownLatch.countDown();
+        logger.error(String.format("线程name:%s",Thread.currentThread().getName()),e);
     }
 }
