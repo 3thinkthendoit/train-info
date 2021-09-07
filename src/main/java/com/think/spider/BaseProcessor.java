@@ -27,7 +27,7 @@ public abstract class BaseProcessor implements PageProcessor {
             //间隔时间
             .setSleepTime(1000)
             //超时时间
-            .setTimeOut(10000);
+            .setTimeOut(20000);
             //设置代理
            // .setHttpProxy();
 

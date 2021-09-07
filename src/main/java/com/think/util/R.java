@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package com.think.common.domain;
+package com.think.util;
 
 import org.apache.http.HttpStatus;
 import java.util.HashMap;

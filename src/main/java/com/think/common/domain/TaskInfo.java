@@ -33,7 +33,17 @@ public class TaskInfo {
 
     private Map<String,String> headers = Maps.newHashMap();
 
+    private Object object;
+
     private boolean isAsync = true;
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
 
     public void setSpiderListener(SpiderListener listener){
         listenerList.add(listener);

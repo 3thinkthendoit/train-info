@@ -12,12 +12,12 @@
     </select>
 
     <select id="getTrainList" resultType="com.think.db.entity.TrainInfoEntity">
-        select train_code,train_no from train_info where state = 0 limit 50
+        select train_code,train_no from train_info where state = 0
     </select>
 
     <update id="updateTrainInfoByTrainCode" parameterType="map">
         update train_info
-        set train_class_name = #{trainClass},service_type=#{serviceType},state = 1
+        set train_class_name = #{trainClass},service_type=#{serviceType},state = 1,train_class_name=#{trainClass}
         where train_code = #{trainCode}
     </update>
 </mapper>

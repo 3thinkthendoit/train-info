@@ -2,12 +2,14 @@ package com.think.db.mapper;
 
 import com.think.db.entity.StationInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  *  Station数据接口
  * @author hg
  * @since 2021-08-06
  */
+@Mapper
 public interface IStationInfoMapper extends BaseMapper<StationInfoEntity> {
 
     /**

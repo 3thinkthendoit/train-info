@@ -1,7 +1,7 @@
 package com.think.service.spider;
 
-import com.alibaba.fastjson.JSONObject;
 import com.think.common.domain.TaskInfo;
+import com.think.spider.SpiderDownloader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,6 +32,8 @@ public class SpiderService {
         //下载器配置
         if(taskInfo.getDownloader()!=null){
             spider.setDownloader(taskInfo.getDownloader());
+        }else{
+            spider.setDownloader(new SpiderDownloader(taskInfo.getListenerList()));
         }
         if(taskInfo.getScheduler() !=null){
             spider.setScheduler(taskInfo.getScheduler());

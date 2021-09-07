@@ -1,16 +1,21 @@
 package com.think.spider.train;
 
 import com.google.common.collect.Maps;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TaskContext;
 import com.think.common.domain.TrainDetailInfo;
 import com.think.db.entity.TrainDetailEntity;
-import com.think.service.train.TrainDetailService;
+import com.think.service.task.TaskService;
+import com.think.service.task.TrainDetailTaskService;
 import com.think.util.SpringContextUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -23,19 +28,17 @@ public class TrainDetailPipeline implements Pipeline {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    private TrainDetailService trainDetailService = SpringContextUtil.getBean(TrainDetailService.class);
+    private SpiderTaskContext spiderTaskContext;
 
-    private CountDownLatch countDownLatch;
-
-    public TrainDetailPipeline(CountDownLatch countDownLatch){
-        this.countDownLatch = countDownLatch;
+    public TrainDetailPipeline(SpiderTaskContext context){
+        this.spiderTaskContext = context;
     }
 
     @Override
     public void process(ResultItems resultItems, Task task) {
        try {
            List<TrainDetailInfo> list = resultItems.get("data");
-           if(list ==null || list.isEmpty()){
+           if(CollectionUtils.isEmpty(list)){
                return;
            }
            String trainCode = resultItems.get("station_train_code");
@@ -59,15 +62,13 @@ public class TrainDetailPipeline implements Pipeline {
                trainDetailEntity.setArriveDayDiff(Byte.valueOf(tInfo.getArriveDayDiff()));
                trainDetailList.add(trainDetailEntity);
            }
-           Map<String,Object> map = Maps.newHashMap();
-           map.put("trainClass",trainClass);
-           map.put("serviceType",serviceType);
-           map.put("trainCode",trainCode);
-           trainDetailService.handleTrainDetail(trainDetailList,map);
+           spiderTaskContext.getData().put("trainClass",trainClass);
+           spiderTaskContext.getData().put("serviceType",serviceType);
+           spiderTaskContext.getData().put("trainCode",trainCode);
+           spiderTaskContext.getData().put("list",trainDetailList);
+           spiderTaskContext.getTaskService().afterTask(spiderTaskContext);
        }catch (Exception e){
            logger.error(e.getMessage(),e);
-       }finally {
-           countDownLatch.countDown();
        }
     }
 
