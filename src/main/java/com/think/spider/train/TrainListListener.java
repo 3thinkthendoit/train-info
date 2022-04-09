@@ -1,13 +1,10 @@
 package com.think.spider.train;
 
-import com.think.common.domain.SpiderTaskContext;
-import com.think.common.domain.TaskContext;
+import com.think.infrastructure.common.domain.SpiderTaskContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.SpiderListener;
-
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @author hg

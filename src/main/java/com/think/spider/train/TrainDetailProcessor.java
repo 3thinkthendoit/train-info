@@ -2,8 +2,8 @@ package com.think.spider.train;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.think.common.domain.SpiderTaskContext;
-import com.think.common.domain.TrainDetailInfo;
+import com.think.infrastructure.common.domain.SpiderTaskContext;
+import com.think.infrastructure.common.domain.TrainDetailInfo;
 import com.think.spider.BaseProcessor;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

@@ -2,10 +2,9 @@ package com.think.spider.station;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.think.common.domain.SpiderTaskContext;
-import com.think.db.entity.StationInfoEntity;
-import com.think.common.domain.StationNameInfo;
-import com.think.service.task.TaskService;
+import com.think.infrastructure.common.domain.SpiderTaskContext;
+import com.think.infrastructure.mybits.po.StationInfoPO;
+import com.think.infrastructure.common.domain.StationNameInfo;
 import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +34,11 @@ public class StationNamePipeline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
         List<StationNameInfo> stationInfoList = resultItems.get("data");
         logger.info("stationPipeline：{}", JSONObject.toJSON(stationInfoList));
-        List<StationInfoEntity> stationList = Lists.newArrayList();
-        StationInfoEntity station = null;
+        List<StationInfoPO> stationList = Lists.newArrayList();
+        StationInfoPO station = null;
         StationNameInfo stationInfoBO = null;
         for (int i = 0; i < stationInfoList.size(); i++) {
-            station = new StationInfoEntity();
+            station = new StationInfoPO();
             stationInfoBO = stationInfoList.get(i);
             station.setStationCode(stationInfoBO.getStationCode());
             station.setStationId(Integer.valueOf(stationInfoBO.getStationId()));

@@ -2,13 +2,9 @@ package com.think.spider.train;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Maps;
-import com.think.common.domain.SpiderTaskContext;
-import com.think.common.domain.TaskContext;
-import com.think.common.domain.TrainListInfo;
-import com.think.db.entity.TrainInfoEntity;
-import com.think.service.task.TaskService;
-import com.think.service.task.TrainInfoTaskService;
-import com.think.util.SpringContextUtil;
+import com.think.infrastructure.common.domain.SpiderTaskContext;
+import com.think.infrastructure.common.domain.TrainListInfo;
+import com.think.infrastructure.mybits.po.TrainInfoPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.ResultItems;
@@ -19,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @author hg
@@ -49,12 +44,12 @@ public class TrainListPipeline implements Pipeline {
         Stopwatch sw = Stopwatch.createStarted();
         try {
             List<TrainListInfo> list = resultItems.get("data");
-            List<TrainInfoEntity> trainList = new ArrayList<>(list.size());
-            TrainInfoEntity trainInfoEntity = null;
+            List<TrainInfoPO> trainList = new ArrayList<>(list.size());
+            TrainInfoPO trainInfoEntity = null;
             TrainListInfo trainListInfo = null;
             for (int i = 0; i < list.size(); i++) {
                 trainListInfo = list.get(i);
-                trainInfoEntity = new TrainInfoEntity();
+                trainInfoEntity = new TrainInfoPO();
                 trainInfoEntity.setDepart(trainListInfo.getDepart());
                 trainInfoEntity.setDestination(trainListInfo.getDestination());
                 trainInfoEntity.setTrainNo(trainListInfo.getTrainNo());

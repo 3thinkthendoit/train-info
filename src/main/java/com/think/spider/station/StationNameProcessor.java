@@ -1,6 +1,6 @@
 package com.think.spider.station;
 
-import com.think.common.domain.StationNameInfo;
+import com.think.infrastructure.common.domain.StationNameInfo;
 import com.think.spider.BaseProcessor;
 import org.assertj.core.util.Lists;
 import us.codecraft.webmagic.Page;

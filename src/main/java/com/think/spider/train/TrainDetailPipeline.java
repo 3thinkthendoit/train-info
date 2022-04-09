@@ -1,13 +1,8 @@
 package com.think.spider.train;
 
-import com.google.common.collect.Maps;
-import com.think.common.domain.SpiderTaskContext;
-import com.think.common.domain.TaskContext;
-import com.think.common.domain.TrainDetailInfo;
-import com.think.db.entity.TrainDetailEntity;
-import com.think.service.task.TaskService;
-import com.think.service.task.TrainDetailTaskService;
-import com.think.util.SpringContextUtil;
+import com.think.infrastructure.common.domain.SpiderTaskContext;
+import com.think.infrastructure.common.domain.TrainDetailInfo;
+import com.think.infrastructure.mybits.po.TrainDetailPO;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +10,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @author hg
@@ -44,11 +36,11 @@ public class TrainDetailPipeline implements Pipeline {
            String trainCode = resultItems.get("station_train_code");
            String trainClass= resultItems.get("train_class_name");
            String serviceType = resultItems.get("service_type");
-           List<TrainDetailEntity> trainDetailList = new ArrayList<TrainDetailEntity>(list.size());
-           TrainDetailEntity trainDetailEntity= null;
+           List<TrainDetailPO> trainDetailList = new ArrayList<TrainDetailPO>(list.size());
+           TrainDetailPO trainDetailEntity= null;
            TrainDetailInfo tInfo = null;
            for (int i = 0; i < list.size(); i++) {
-               trainDetailEntity = new TrainDetailEntity();
+               trainDetailEntity = new TrainDetailPO();
                tInfo = list.get(i);
                trainDetailEntity.setArriveTime(tInfo.getArriveTime());
                trainDetailEntity.setIsEnabled((byte)0);

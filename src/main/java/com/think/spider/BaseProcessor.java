@@ -1,12 +1,10 @@
 package com.think.spider;
 
-import com.think.util.SpiderUtil;
+import com.think.infrastructure.common.util.SpiderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
-
-import java.util.List;
 
 /**
  * @author hg
