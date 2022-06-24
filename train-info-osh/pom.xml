@@ -8,16 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>train-info-app</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.think</groupId>
-            <artifactId>train-info-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>train-info-osh</artifactId>
 
 
 </project>

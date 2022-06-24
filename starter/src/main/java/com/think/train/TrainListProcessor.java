@@ -2,8 +2,8 @@ package com.think.train;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.think.infrastructure.common.domain.SpiderTaskContext;
-import com.think.infrastructure.common.domain.TrainListInfo;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TrainListInfo;
 import com.think.spider.BaseProcessor;
 import org.assertj.core.util.Lists;
 import us.codecraft.webmagic.Page;

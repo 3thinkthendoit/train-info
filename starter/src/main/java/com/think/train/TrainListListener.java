@@ -1,6 +1,6 @@
 package com.think.train;
 
-import com.think.infrastructure.common.domain.SpiderTaskContext;
+import com.think.common.domain.SpiderTaskContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Request;

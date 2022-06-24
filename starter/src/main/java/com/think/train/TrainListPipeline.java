@@ -2,9 +2,9 @@ package com.think.train;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Maps;
-import com.think.infrastructure.common.domain.SpiderTaskContext;
-import com.think.infrastructure.common.domain.TrainListInfo;
-import com.think.infrastructure.mybits.po.TrainInfoPO;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TrainListInfo;
+import com.think.infrastructure.mybatis.po.TrainInfoPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.ResultItems;

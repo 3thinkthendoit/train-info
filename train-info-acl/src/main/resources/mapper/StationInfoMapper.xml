@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.think.infrastructure.mybatis.mapper.IStationInfoMapper">
+
+    <update id="deleteAll">
+        update station_info set state = 0
+        where state = 1
+    </update>
+
+    <update id="deleteByStationCode" parameterType="string">
+        update station_info set state = 0
+        where station_code = #{stationCode}
+    </update>
+</mapper>

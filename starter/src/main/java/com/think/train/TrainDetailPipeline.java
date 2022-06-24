@@ -1,8 +1,8 @@
 package com.think.train;
 
-import com.think.infrastructure.common.domain.SpiderTaskContext;
-import com.think.infrastructure.common.domain.TrainDetailInfo;
-import com.think.infrastructure.mybits.po.TrainDetailPO;
+import com.think.common.domain.SpiderTaskContext;
+import com.think.common.domain.TrainDetailInfo;
+import com.think.infrastructure.mybatis.po.TrainDetailPO;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,23 +1,21 @@
 package com.think.application.service.station;
 
-import com.think.adapter.dto.cmd.GetAllStationCmd;
-import com.think.application.bo.StationBO;
-import com.think.application.service.adapter.ApplicationAdapter;
-import com.think.application.service.spider.SpiderService;
-import com.think.domain.gateway.StationGateway;
-import com.think.domain.station.entity.StationEntity;
-import com.think.domain.station.service.StationDomainService;
-import com.think.infrastructure.http.IHttpClient;
+import com.think.domain.common.TrainDataSource;
+import com.think.domain.station.model.CreateStationCommand;
+import com.think.domain.station.model.StationAggregate;
+import com.think.domain.station.port.repository.StationRepository;
+import com.think.domain.station.service.GetStationDomainService;
+import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
 /**
+ *  车站应用服务
  * @author hg
  * @date 2022-04-11日 14:24
  */
@@ -26,27 +24,36 @@ public class StationAppService {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
+
     @Autowired
-    IHttpClient iHttpClient;
+    GetStationDomainService getStationDomainService;
     @Autowired
-    ApplicationAdapter applicationAdapter;
-    @Autowired
-    StationGateway stationGateway;
+    StationRepository stationRepository;
 
     /**
-     * 根据数据源获取车站信息
-     * @param cmd
+     * 根据数据源获取车站信息(通用用例)
+     * @param trainDataSource
      */
     @Async
-    public void executeGetAllStation(GetAllStationCmd cmd){
+    public void getAllStation(TrainDataSource trainDataSource){
        try {
-           String source = cmd.getSource();
-           SpiderService spiderService =  (SpiderService) applicationAdapter.get(source);
-           List<StationBO> list =  spiderService.execute(iHttpClient,null);
-           stationGateway.updateStationList(list);
+           List<CreateStationCommand>  createStationCommands = getStationDomainService.getAllStationByDataSource(trainDataSource);
+           List<StationAggregate> stationAggregates = Lists.newArrayList();
+           for (int i = 0; i < createStationCommands.size(); i++) {
+               StationAggregate stationAggregate = StationAggregate.create(createStationCommands.get(i));
+               //城市地域归类
+               stationAggregate.setCity();
+               //设置经纬度
+               stationAggregate.setLongitudeAndLatitude();
+               stationAggregates.add(stationAggregate);
+           }
+           stationRepository.batchSave(stationAggregates);
+           logger.info("成功处理车站size = {} :",stationAggregates.size());
        }catch (Exception e){
            logger.error(e.getMessage(),e);
        }
     }
+
+
 }
 

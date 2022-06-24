@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>train-info-app</artifactId>
+    <artifactId>train-info-acl</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.think</groupId>
