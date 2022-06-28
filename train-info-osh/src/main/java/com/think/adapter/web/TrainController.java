@@ -1,17 +1,15 @@
 package com.think.adapter.web;
 
+import com.think.application.service.station.StationAppService;
+import com.think.application.service.train.TrainAppService;
 import com.think.common.util.R;
-import com.think.application.service.task.StationTaskService;
-import com.think.application.service.task.TrainDetailTaskService;
-import com.think.application.service.task.TrainInfoTaskService;
-import com.think.infrastructure.http.IHttpClient;
+import com.think.domain.common.TrainDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author hg
@@ -21,38 +19,24 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/train")
 public class TrainController {
 
-    private final String PASSWORD = "888888";
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    StationTaskService stationTaskService;
-    @Autowired
-    TrainInfoTaskService trainService;
-    @Autowired
-    TrainDetailTaskService trainDetailTaskService;
 
-    @RequestMapping("/getStationInfo")
+    @Autowired
+    StationAppService stationAppService;
+    @Autowired
+    TrainAppService trainAppService;
+
+    @RequestMapping("/getStationInfo/12306")
     public R getAllStationInfo(){
-        stationTaskService.runTask();
+        stationAppService.getAllStation(TrainDataSource.D12306);
         return R.ok("getStationTask is running......");
     }
 
-    @RequestMapping("/getAllTrainInfo")
+    @RequestMapping("/getAllTrainInfo/12306")
     public R getAllTrainInfo(){
-        trainService.runTask();
+        trainAppService.executeGetAllStation(TrainDataSource.D12306);
         return R.ok("getTrainInfoTask is running......");
-    }
-
-    @RequestMapping("/getAllTrainDetailInfo")
-    public R getAllTrainDetailInfo(){
-        trainDetailTaskService.getAllTrainDetailInfo();
-        return R.ok("getTrainDetailInfoTask is running......");
-    }
-
-    @RequestMapping("/test")
-    public R test(HttpServletRequest request) throws Exception {
-
-        return R.ok("test");
     }
 }

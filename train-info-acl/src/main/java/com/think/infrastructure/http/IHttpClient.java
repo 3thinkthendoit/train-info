@@ -285,6 +285,6 @@ public class IHttpClient implements InitializingBean, DisposableBean {
 
 
     public static void main(String[] args) throws Exception {
-        IHttpClient client = new IHttpClient(true);
+        //IHttpClient client = new IHttpClient(true);
     }
 }

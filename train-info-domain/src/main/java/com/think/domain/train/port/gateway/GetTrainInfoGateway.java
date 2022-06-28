@@ -1,10 +1,8 @@
 package com.think.domain.train.port.gateway;
 
 import com.think.domain.common.TrainDataSource;
-import com.think.domain.station.model.CreateStationCommand;
 import com.think.domain.train.model.CreateTrainDetailCommand;
 import com.think.domain.train.model.CreateTrainInfoCommand;
-
 import java.util.List;
 
 /**

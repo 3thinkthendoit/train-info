@@ -20,7 +20,7 @@ public class GetTrainInfoDomainService {
     @Autowired
     GetTrainInfoGateway getTrainInfoGateway;
 
-    public List<CreateTrainInfoCommand> getAllStationByDataSource(TrainDataSource trainDataSource) {
+    public List<CreateTrainInfoCommand> getAllTrainInfoByDataSource(TrainDataSource trainDataSource) {
         List<CreateTrainInfoCommand> createTrainInfoCommands = getTrainInfoGateway.getAllTrainListByDataSource(trainDataSource);
         //通用处理数据
         return createTrainInfoCommands;

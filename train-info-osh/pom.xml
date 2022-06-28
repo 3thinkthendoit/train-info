@@ -9,6 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>train-info-osh</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.think</groupId>
+            <artifactId>train-info-acl</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.think</groupId>
+            <artifactId>train-info-app</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

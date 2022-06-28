@@ -2,6 +2,7 @@ package com.think.application.service.train;
 
 import com.think.domain.common.TrainDataSource;
 import com.think.domain.train.model.CreateTrainInfoCommand;
+import com.think.domain.train.model.TrainInfoAggregate;
 import com.think.domain.train.service.GetTrainInfoDomainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,15 +26,15 @@ public class TrainAppService {
     @Autowired
     GetTrainInfoDomainService getTrainInfoDomainService;
 
-    ExecutorService cachedThreadPool = Executors.newFixedThreadPool(10);
+    ExecutorService cachedThreadPool = Executors.newFixedThreadPool(20);
 
     /**
-     * 通用用例-批量获取车次信息
+     * 通用用例-批量保存车次信息
      * @param trainDataSource
      */
     @Async
     public void executeGetAllStation(TrainDataSource trainDataSource){
-        List<CreateTrainInfoCommand> createTrainInfoCommands = getTrainInfoDomainService.getAllStationByDataSource(trainDataSource);
+        List<CreateTrainInfoCommand> createTrainInfoCommands = getTrainInfoDomainService.getAllTrainInfoByDataSource(trainDataSource);
         createTrainInfoCommands.forEach(cmd->{
             cachedThreadPool.submit(new Runnable() {
                 @Override
@@ -46,8 +47,8 @@ public class TrainAppService {
 
     private void getTrainInfo(TrainDataSource trainDataSource,CreateTrainInfoCommand createTrainInfoCommand){
         try{
-            //getTrainInfoDomainService.
-
+            CreateTrainInfoCommand command = getTrainInfoDomainService.getTrainDetail(createTrainInfoCommand,trainDataSource);
+            TrainInfoAggregate trainInfoAggregate = TrainInfoAggregate.create(command);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
         }

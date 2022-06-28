@@ -1,6 +1,9 @@
 package com.think.domain.train.model;
 
-import com.think.domain.station.model.StationAggregate;
+
+import org.assertj.core.util.Lists;
+
+import java.util.List;
 
 /**
  * @author hg
@@ -20,10 +23,23 @@ public class TrainInfoAggregate {
 
     private Byte state;
 
-    public static TrainInfoAggregate create(CreateTrainInfoCommand createTrainInfoCommand){
+    private List<TrainDetailEntity> trainDetailList = Lists.newArrayList();
 
+    public static TrainInfoAggregate create(CreateTrainInfoCommand createTrainInfoCommand) throws Exception {
         TrainInfoAggregate trainInfoAggregate = new TrainInfoAggregate();
-
+        trainInfoAggregate.trainNo = createTrainInfoCommand.getTrainNo();
+        trainInfoAggregate.depart = createTrainInfoCommand.getDepart();
+        trainInfoAggregate.destination = createTrainInfoCommand.getDestination();
+        trainInfoAggregate.num = createTrainInfoCommand.getNum();
+        trainInfoAggregate.trainId = new TrainId(null,createTrainInfoCommand.getDate(),
+                createTrainInfoCommand.getTrainCode());
+        List<CreateTrainDetailCommand> list = createTrainInfoCommand.getCreateTrainDetailCommandList();
+        if(list.size() ==0){
+            throw new Exception("CreateTrainDetailCommand list size is 0!");
+        }
+        list.forEach(createTrainDetailCommand -> {
+            trainInfoAggregate.trainDetailList.add(TrainDetailEntity.create(createTrainDetailCommand));
+        });
         return  trainInfoAggregate;
     }
 

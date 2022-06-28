@@ -1,6 +1,5 @@
 package com.think.domain.station.model;
 
-import org.springframework.util.StringUtils;
 
 /**
  *

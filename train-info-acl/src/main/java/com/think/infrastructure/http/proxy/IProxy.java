@@ -2,7 +2,6 @@ package com.think.infrastructure.http.proxy;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.SocketAddress;
 
 /**
  * @author hg
