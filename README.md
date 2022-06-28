@@ -1,5 +1,11 @@
 # 列车正晚点,车站大屏实时系统
-12306 车站，车次数据，车次详情获取 
+
+
+DDD菱形架构参考
+![image](https://user-images.githubusercontent.com/13362524/176121875-f306b547-e157-4717-aa47-d7ba78d191e7.png)
+
+
+
 
 <!-- DIRSTRUCTURE_START_MARKER -->
 <pre>
@@ -135,7 +141,7 @@ train-info/
                   │   │     └─ GetAllTrainInfoCmd.java ........ 
                   │   │─ web/ ................................. 
                   │   │   └─ TrainController.java .............
-                  └─ pl/ ..................................北向网关防腐层(PL+业务防腐)   
+                  └─ pl/ ...................................... 北向网关防腐层(PL+业务防腐)   
 </pre>
 <!-- DIRSTRUCTURE_END_MARKER -->
 
