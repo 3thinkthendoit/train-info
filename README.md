@@ -1,13 +1,18 @@
 # 列车正晚点,车站大屏实时系统
 
-
+<pre>
 DDD菱形架构参考
-![image](https://user-images.githubusercontent.com/13362524/176121875-f306b547-e157-4717-aa47-d7ba78d191e7.png)
+</pre>
 
+![image](https://user-images.githubusercontent.com/13362524/176121875-f306b547-e157-4717-aa47-d7ba78d191e7.png)
+<pre>
 调用链参考：
+</pre>
 ![image](https://user-images.githubusercontent.com/13362524/176122143-773e7ba8-b6a0-43bb-b5ef-3a5682481c1b.png)
 
+<pre>
 代码结构说明
+<pre>
 <!-- DIRSTRUCTURE_START_MARKER -->
 <pre>
 train-info/
