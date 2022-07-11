@@ -7,7 +7,7 @@ import com.think.infrastructure.mybatis.mapper.IStationInfoMapper;
 import com.think.infrastructure.mybatis.po.StationInfoPO;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author hg
  * @date 2022-04-08日 15:47
  */
-@Component
+@Repository
 public class StationRepositoryImpl implements StationRepository {
 
     @Autowired

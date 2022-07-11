@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 获取车站信息领域服务
+ * 获取车站信息领域服务（由产品定制层抽取共性下沉为领域能力）
  *
  * @author hg
  * @date 2022-04-01日 15:28
@@ -19,6 +19,7 @@ public class GetStationDomainService {
 
     @Autowired
     GetStationGateway getStationGateway;
+
 
 
     public List<CreateStationCommand> getAllStationByDataSource(TrainDataSource trainDataSource) {

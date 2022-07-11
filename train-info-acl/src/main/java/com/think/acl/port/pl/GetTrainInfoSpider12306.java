@@ -2,6 +2,7 @@ package com.think.acl.port.pl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.think.common.SpiderService;
 import com.think.domain.train.model.CreateTrainInfoCommand;
 import com.think.infrastructure.http.IHttpClient;
 import com.think.infrastructure.http.IResponse;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author hg
  * @date 2022-04-14日 15:50
  */
-public class GetTrainInfoSpider12306 implements SpiderService<CreateTrainInfoCommand> {
+public class GetTrainInfoSpider12306 extends SpiderService<CreateTrainInfoCommand> {
 
     String url = "https://search.12306.cn/search/v1/train/search?keyword=";
 

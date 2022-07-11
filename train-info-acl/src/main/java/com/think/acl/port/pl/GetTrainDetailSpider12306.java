@@ -3,6 +3,7 @@ package com.think.acl.port.pl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.think.common.SpiderService;
 import com.think.domain.train.model.CreateTrainDetailCommand;
 import com.think.infrastructure.http.IHttpClient;
 import org.assertj.core.util.Lists;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author hg
  * @date 2022-06-24日 16:50
  */
-public class GetTrainDetailSpider12306 implements SpiderService<CreateTrainDetailCommand>{
+public class GetTrainDetailSpider12306 extends SpiderService<CreateTrainDetailCommand>{
 
     String url = "https://kyfw.12306.cn/otn/queryTrainInfo/query?leftTicketDTO.train_no=$trainNo&leftTicketDTO.train_date=$date&rand_code=";
 

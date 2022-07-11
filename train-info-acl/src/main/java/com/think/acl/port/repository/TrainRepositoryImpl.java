@@ -4,12 +4,13 @@ import com.think.domain.train.port.repository.TrainRepository;
 import com.think.infrastructure.mybatis.mapper.ITrainInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author hg
  * @date 2022-04-01日 15:42
  */
-@Component
+@Repository
 public class TrainRepositoryImpl implements TrainRepository {
 
     @Autowired

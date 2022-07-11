@@ -1,4 +1,4 @@
-package com.think.adapter.dto.cmd;
+package com.think.osh.dto.cmd;
 
 import java.util.Date;
 

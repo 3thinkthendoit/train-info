@@ -1,4 +1,4 @@
-package com.think.adapter.web;
+package com.think.osh.web;
 
 import com.think.application.service.station.StationAppService;
 import com.think.application.service.train.TrainAppService;

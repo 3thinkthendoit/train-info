@@ -1,6 +1,7 @@
 package com.think.acl.port.pl;
 
 import com.google.common.collect.Maps;
+import com.think.common.SpiderService;
 import com.think.domain.station.model.CreateStationCommand;
 import com.think.infrastructure.http.IHttpClient;
 import com.think.infrastructure.http.IResponse;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @author hg
  * @date 2022-04-12日 17:10
  */
-public class GetStationInfoSpider12306 implements SpiderService<CreateStationCommand> {
+public class GetStationInfoSpider12306 extends SpiderService<CreateStationCommand> {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
