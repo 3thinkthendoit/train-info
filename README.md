@@ -152,8 +152,6 @@ train-info/
 <!-- DIRSTRUCTURE_END_MARKER -->
 
 
-技术栈：
-spring boot
-webmagic
+
 
 
