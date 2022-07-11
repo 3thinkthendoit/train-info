@@ -1,5 +1,17 @@
-# 列车正晚点,车站大屏实时系统
-12306 车站，车次数据，车次详情获取 
+# 列车正晚点,车站大屏实时系统(领域驱动设计DDD实践)
+
+<pre>
+DDD菱形架构参考
+</pre>
+
+![image](https://user-images.githubusercontent.com/13362524/176121875-f306b547-e157-4717-aa47-d7ba78d191e7.png)
+<pre>
+调用链参考：
+</pre>
+![image](https://user-images.githubusercontent.com/13362524/176122143-773e7ba8-b6a0-43bb-b5ef-3a5682481c1b.png)
+
+
+代码结构说明
 
 <!-- DIRSTRUCTURE_START_MARKER -->
 <pre>
@@ -18,7 +30,7 @@ train-info/
 │        │        │     ├─ gateway/ .......................... 外部服务实现
 │        │        │     │  ├─ GetStationGatewayImpl.java ..... 
 │        │        │     │  └─ GetTrainInfoGatewayImpl.java ... 
-│        │        │     ├─ pl/ ............................... 防腐层
+│        │        │     ├─ pl/ ............................... 南向网关防腐层
 │        │        │     │  ├─ GetStationInfoSpider12306.java . 
 │        │        │     │  ├─ GetTrainDetailSpider12306.java . 
 │        │        │     │  ├─ GetTrainInfoSpider12306.java ... 
@@ -98,22 +110,22 @@ train-info/
 │                    ├─ station/ ............................. 车站限界上下文
 │                    │  ├─ model/ ............................ 车站领域模型
 │                    │  │  ├─ CreateStationCommand.java ...... 创建聚合根command
-│                    │  │  ├─ StationAggregate.java .......... 车站聚合根
-│                    │  │  └─ StationId.java ................. 
+│                    │  │  ├─ StationAggregate.java .......... 车站聚合根(领域行为+工厂)
+│                    │  │  └─ StationId.java ................. 车站唯一标识(Domain Primitive)
 │                    │  ├─ port/ ............................. 领域port适配
 │                    │  │  ├─ gateway/ ....................... 三方服务接口
 │                    │  │  │  └─ GetStationGateway.java ...... 
 │                    │  │  └─ repository/ .................... 资源库接口
 │                    │  │     └─ StationRepository.java ...... 
-│                    │  └─ service/ .......................... 领域服务
+│                    │  └─ service/ .......................... 领域服务(不属于聚合根的领域服务，限界上下文协调领域服务)
 │                    │     └─ GetStationDomainService.java ... 
 │                    └─ train/ ............................... 车次限界上下文
 │                       ├─ model/ ............................ 车次领域模型
 │                       │  ├─ CreateTrainDetailCommand.java .. 创建聚合根command
 │                       │  ├─ CreateTrainInfoCommand.java .... 
 │                       │  ├─ TrainDetailEntity.java ......... 车次运行区间信息
-│                       │  ├─ TrainId.java ................... DP对象
-│                       │  └─ TrainInfoAggregate.java ........ 车次信息聚合根
+│                       │  ├─ TrainId.java ................... 车次唯一标识(Domain Primitive)
+│                       │  └─ TrainInfoAggregate.java ........ 车次信息聚合根(领域行为+工厂)
 │                       ├─ port/ ............................. 领域port适配
 │                       │  ├─ gateway/ ....................... 三方服务接口
 │                       │  │  └─ GetTrainInfoGateway.java .... 
@@ -129,12 +141,13 @@ train-info/
             └─ com/ .......................................... 
                └─ think/ ..................................... 
                   └─ adapter/ ................................ 网关适配器(web,RPC,MQ)
-                     ├─ dto/ ................................. 
-                     │  └─ cmd/ .............................. 
-                     │     ├─ GetAllStationCmd.java .......... 
-                     │     └─ GetAllTrainInfoCmd.java ........ 
-                     └─ web/ ................................. 
-                        └─ TrainController.java .............. 
+                  │   ├─ dto/ ................................. 
+                  │   │  └─ cmd/ .............................. 
+                  │   │     ├─ GetAllStationCmd.java .......... 
+                  │   │     └─ GetAllTrainInfoCmd.java ........ 
+                  │   │─ web/ ................................. 
+                  │   │   └─ TrainController.java .............
+                  └─ pl/ ...................................... 北向网关防腐层(PL+业务防腐)   
 </pre>
 <!-- DIRSTRUCTURE_END_MARKER -->
 
