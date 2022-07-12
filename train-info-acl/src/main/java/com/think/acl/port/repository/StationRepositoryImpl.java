@@ -2,7 +2,7 @@ package com.think.acl.port.repository;
 
 import com.think.domain.station.model.StationAggregate;
 import com.think.domain.station.port.repository.StationRepository;
-import com.think.common.assembler.StationAssembler;
+import com.think.acl.common.assembler.StationAssembler;
 import com.think.infrastructure.mybatis.mapper.IStationInfoMapper;
 import com.think.infrastructure.mybatis.po.StationInfoPO;
 import org.assertj.core.util.Lists;

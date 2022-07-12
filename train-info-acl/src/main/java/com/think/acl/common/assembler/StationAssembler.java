@@ -1,4 +1,4 @@
-package com.think.common.assembler;
+package com.think.acl.common.assembler;
 
 import com.think.domain.station.model.StationAggregate;
 import com.think.infrastructure.mybatis.po.StationInfoPO;

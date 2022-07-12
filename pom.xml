@@ -9,6 +9,7 @@
 		<module>train-info-app</module>
 		<module>train-info-osh</module>
 		<module>starter</module>
+		<module>train-info-infrastructure</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

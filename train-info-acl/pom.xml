@@ -21,7 +21,13 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>3.17.4</version>
-        </dependency> 
+        </dependency>
+        <dependency>
+            <groupId>com.think</groupId>
+            <artifactId>train-info-infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 
