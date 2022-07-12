@@ -1,7 +1,13 @@
 # 列车正晚点,车站大屏实时系统(领域驱动设计DDD实践)
 
 <pre>
-DDD菱形架构参考
+DDD架构参考
+</pre>
+![image](https://user-images.githubusercontent.com/13362524/178436883-5f1a02e1-7093-40e3-9fa1-46589d010502.png)
+
+
+<pre>
+菱形逻辑架构参考
 </pre>
 
 ![image](https://user-images.githubusercontent.com/13362524/176121875-f306b547-e157-4717-aa47-d7ba78d191e7.png)
